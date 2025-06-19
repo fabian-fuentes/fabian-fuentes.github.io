@@ -15,7 +15,7 @@
       <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#education">Education</a>
-      <a href="#projects">Featured Project</a>
+      <a href="#projects">Featured Projects</a>
       <a href="#publications">Publications</a>
       <a href="#contact">Contact</a>
     </nav>
@@ -45,7 +45,7 @@
       <p><strong>Bachelor's in Economics</strong>, Universidad Autónoma Metropolitana (2013–2017)</p>
     </section>
 
-    <section id="skills">
+    <section id="technical-skills">
       <h2>Technical Skills</h2>
       <ul>
         <li><strong>Programming:</strong> R, Python, SQL, Stata</li>
@@ -76,9 +76,19 @@
   </main>
 
   <footer>
-    <p><a href="https://github.com/fabian-fuentes" target="_blank" rel="noopener">GitHub Profile</a></p>
-    <p>&copy; 2024 Carlos Fabian Fuentes Rivas. All rights reserved.</p>
-    <p>Contact: <a href="mailto:cffuentes@tec.mx">cffuentes@tec.mx</a></p>
+    <p>
+      <a href="https://github.com/fabian-fuentes" target="_blank" rel="noopener">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub" style="width:20px; height:20px; vertical-align:middle;"/> GitHub
+      </a>
+      |
+      <a href="https://www.linkedin.com/in/fabian-fuentes-7a69b7145/" target="_blank" rel="noopener">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" style="width:20px; height:20px; vertical-align:middle;"/> LinkedIn
+      </a>
+    </p>
+    <p>&copy; <span id="year"></span> Carlos Fabian Fuentes Rivas. All rights reserved.</p>
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
   </footer>
 
 </body>
