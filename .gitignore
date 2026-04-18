@@ -1,0 +1,18 @@
+# Claude Code tooling (skill install, local settings)
+.claude/
+
+# Source material for content migration (not part of deploy artifact)
+_source.html
+_source/
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Python cache (from uipro scripts)
+__pycache__/
+*.pyc
