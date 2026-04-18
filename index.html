@@ -2,769 +2,441 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Carlos Fabian Fuentes-Rivas - Economist & Data Scientist</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --primary: #0f172a;
-      --secondary: #1e293b;
-      --accent: #3b82f6;
-      --accent-light: #60a5fa;
-      --text: #f8fafc;
-      --text-muted: #cbd5e1;
-      --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      --card-bg: rgba(30, 41, 59, 0.8);
-      --border: rgba(148, 163, 184, 0.1);
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--primary);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* Animated background */
-    body::before {
-      content: '';
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
-      z-index: -1;
-      animation: float 20s ease-in-out infinite;
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0px); }
-      50% { transform: translateY(-20px); }
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    /* Header */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      background: rgba(15, 23, 42, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      z-index: 1000;
-      transition: all 0.3s ease;
-    }
-
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 0;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: 700;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    nav {
-      display: flex;
-      gap: 2rem;
-    }
-
-    nav a {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 500;
-      position: relative;
-      transition: all 0.3s ease;
-    }
-
-    nav a:hover {
-      color: var(--accent-light);
-    }
-
-    nav a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 2px;
-      background: var(--gradient);
-      transition: width 0.3s ease;
-    }
-
-    nav a:hover::after {
-      width: 100%;
-    }
-
-    /* Hero Section */
-    .hero {
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 4rem;
-      align-items: center;
-      width: 100%;
-    }
-
-    .hero-text h1 {
-      font-size: 4rem;
-      font-weight: 800;
-      margin-bottom: 1rem;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: slideInLeft 1s ease-out;
-    }
-
-    .hero-text .subtitle {
-      font-size: 1.5rem;
-      color: var(--accent-light);
-      margin-bottom: 2rem;
-      animation: slideInLeft 1s ease-out 0.2s both;
-    }
-
-    .hero-text p {
-      font-size: 1.1rem;
-      color: var(--text-muted);
-      margin-bottom: 2rem;
-      animation: slideInLeft 1s ease-out 0.4s both;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 1rem;
-      animation: slideInLeft 1s ease-out 0.6s both;
-    }
-
-    .btn {
-      padding: 1rem 2rem;
-      border: none;
-      border-radius: 50px;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-primary {
-      background: var(--gradient);
-      color: white;
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: var(--accent-light);
-      border: 2px solid var(--accent);
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
-    }
-
-    .hero-visual {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    .profile-image-container {
-      width: 400px;
-      height: 400px;
-      position: relative;
-      animation: slideInRight 1s ease-out;
-    }
-
-    .profile-image {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      border: 4px solid transparent;
-      background: var(--gradient);
-      padding: 4px;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 20px 40px rgba(59, 130, 246, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .profile-image:hover {
-      transform: scale(1.05);
-      box-shadow: 0 25px 50px rgba(59, 130, 246, 0.4);
-    }
-
-    .profile-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-radius: 50%;
-      background: var(--secondary);
-    }
-
-    .profile-image::before {
-      content: '';
-      position: absolute;
-      top: -2px;
-      left: -2px;
-      right: -2px;
-      bottom: -2px;
-      background: var(--gradient);
-      border-radius: 50%;
-      z-index: -1;
-      animation: rotate 10s linear infinite;
-    }
-
-    @keyframes rotate {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    /* Sections */
-    section {
-      padding: 6rem 0;
-      position: relative;
-    }
-
-    .section-title {
-      font-size: 3rem;
-      font-weight: 700;
-      text-align: center;
-      margin-bottom: 3rem;
-      background: var(--gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .cards-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-      gap: 2rem;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 20px;
-      padding: 2rem;
-      border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 2px;
-      background: var(--gradient);
-      transform: scaleX(0);
-      transition: transform 0.3s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-    }
-
-    .card:hover::before {
-      transform: scaleX(1);
-    }
-
-    .card h3 {
-      color: var(--accent-light);
-      margin-bottom: 1rem;
-      font-size: 1.5rem;
-    }
-
-    .card .company {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      margin-bottom: 1rem;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .skill-category {
-      background: var(--card-bg);
-      border-radius: 15px;
-      padding: 1.5rem;
-      border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-    }
-
-    .skill-category h4 {
-      color: var(--accent-light);
-      margin-bottom: 1rem;
-      font-size: 1.2rem;
-    }
-
-    .skill-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-    }
-
-    .skill-tag {
-      background: rgba(59, 130, 246, 0.2);
-      color: var(--accent-light);
-      padding: 0.5rem 1rem;
-      border-radius: 25px;
-      font-size: 0.9rem;
-      border: 1px solid rgba(59, 130, 246, 0.3);
-    }
-
-    .publication-card {
-      background: var(--card-bg);
-      border-radius: 15px;
-      padding: 2rem;
-      border: 1px solid var(--border);
-      backdrop-filter: blur(10px);
-      margin-bottom: 2rem;
-    }
-
-    .publication-card h4 {
-      color: var(--accent-light);
-      margin-bottom: 1rem;
-      font-size: 1.3rem;
-    }
-
-    .publication-card .journal {
-      color: var(--text-muted);
-      font-style: italic;
-      margin-bottom: 1rem;
-    }
-
-    .publication-card a {
-      color: var(--accent-light);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .publication-card a:hover {
-      text-decoration: underline;
-    }
-
-    /* Contact Section */
-    .contact-content {
-      text-align: center;
-      max-width: 600px;
-      margin: 0 auto;
-    }
-
-    .contact-info {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-top: 2rem;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-muted);
-    }
-
-    .contact-item a {
-      color: var(--accent-light);
-      text-decoration: none;
-    }
-
-    /* Footer */
-    footer {
-      background: var(--secondary);
-      padding: 3rem 0;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      margin-bottom: 2rem;
-    }
-
-    .footer-links a {
-      color: var(--text-muted);
-      text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      transition: color 0.3s ease;
-    }
-
-    .footer-links a:hover {
-      color: var(--accent-light);
-    }
-
-    .social-icon {
-      width: 20px;
-      height: 20px;
-      filter: invert(1);
-    }
-
-    /* Animations */
-    @keyframes slideInLeft {
-      from {
-        opacity: 0;
-        transform: translateX(-50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes slideInRight {
-      from {
-        opacity: 0;
-        transform: translateX(50px);
-      }
-      to {
-        opacity: 1;
-        transform: translateX(0);
-      }
-    }
-
-    @keyframes growUp {
-      from {
-        height: 0;
-      }
-      to {
-        height: var(--final-height);
-      }
-    }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      .hero-content {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .hero-text h1 {
-        font-size: 2.5rem;
-      }
-
-      .profile-image-container {
-        width: 300px;
-        height: 300px;
-        margin-bottom: 2rem;
-      }
-
-      nav {
-        display: none;
-      }
-
-      .cards-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .contact-info {
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .footer-links {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carlos Fabián Fuentes Rivas — Economista · Política pública y datos</title>
+
+  <meta name="description" content="Economista especializado en modelación econométrica, política pública y análisis geoespacial. Maestría en Economía Aplicada en el Tecnológico de Monterrey. Investigación sobre pobreza, ODS y decisiones bajo incertidumbre." />
+  <meta name="author" content="Carlos Fabián Fuentes Rivas" />
+  <meta name="theme-color" content="#141413" />
+  <meta name="color-scheme" content="dark" />
+
+  <link rel="canonical" href="https://fabian-fuentes.github.io/" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23141413'/%3E%3Ctext x='50%25' y='54%25' text-anchor='middle' font-family='Georgia,serif' font-size='34' fill='%23d97757' font-style='italic'%3Ef%3C/text%3E%3C/svg%3E" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://fabian-fuentes.github.io/" />
+  <meta property="og:title" content="Carlos Fabián Fuentes Rivas — Economista · Política pública y datos" />
+  <meta property="og:description" content="Modelación econométrica, política pública y análisis geoespacial para la toma de decisiones bajo incertidumbre." />
+  <meta property="og:image" content="https://fabian-fuentes.github.io/profile.jpg" />
+  <meta property="og:locale" content="es_MX" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Carlos Fabián Fuentes Rivas — Economista" />
+  <meta name="twitter:description" content="Modelación econométrica, política pública y análisis geoespacial." />
+  <meta name="twitter:image" content="https://fabian-fuentes.github.io/profile.jpg" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..500,0..100;1,9..144,300..500,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" />
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Carlos Fabián Fuentes Rivas",
+    "alternateName": "Fabian Fuentes",
+    "jobTitle": "Economista · Investigador en política pública",
+    "url": "https://fabian-fuentes.github.io/",
+    "image": "https://fabian-fuentes.github.io/profile.jpg",
+    "email": "mailto:cffuentes@tec.mx",
+    "worksFor": { "@type": "Organization", "name": "Tecnológico de Monterrey" },
+    "alumniOf": [
+      { "@type": "CollegeOrUniversity", "name": "Universidad Autónoma Metropolitana" },
+      { "@type": "CollegeOrUniversity", "name": "Tecnológico de Monterrey" }
+    ],
+    "sameAs": [
+      "https://github.com/fabian-fuentes",
+      "https://www.linkedin.com/in/fabian-fuentes-7a69b7145/"
+    ]
+  }
+  </script>
 </head>
 <body>
-  <header>
+  <header class="nav" id="top">
     <div class="container">
-      <div class="header-content">
-        <div class="logo">CFFR</div>
-        <nav>
-          <a href="#about">About</a>
-          <a href="#experience">Experience</a>
-          <a href="#education">Education</a>
-          <a href="#skills">Skills</a>
-          <a href="#projects">Projects</a>
-          <a href="#publications">Publications</a>
-          <a href="#contact">Contact</a>
+      <div class="nav__row">
+        <a href="#top" class="nav__brand" aria-label="Ir al inicio">
+          <span class="nav__brand-dot" aria-hidden="true"></span>
+          Fabián Fuentes
+        </a>
+
+        <nav aria-label="Navegación principal">
+          <ul class="nav__links" id="nav-menu">
+            <li><a class="nav__link" href="#about">Sobre mí</a></li>
+            <li><a class="nav__link" href="#experience">Experiencia</a></li>
+            <li><a class="nav__link" href="#skills">Capacidades</a></li>
+            <li><a class="nav__link" href="#projects">Proyectos</a></li>
+            <li><a class="nav__link" href="#publications">Publicaciones</a></li>
+          </ul>
         </nav>
+
+        <a href="#contact" class="nav__cta">Contacto</a>
+
+        <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu-mobile" aria-label="Abrir menú">
+          <span></span>
+        </button>
       </div>
+    </div>
+
+    <div class="nav__menu" id="nav-menu-mobile">
+      <a class="nav__link" href="#about">Sobre mí</a>
+      <a class="nav__link" href="#experience">Experiencia</a>
+      <a class="nav__link" href="#education">Educación</a>
+      <a class="nav__link" href="#skills">Capacidades</a>
+      <a class="nav__link" href="#projects">Proyectos</a>
+      <a class="nav__link" href="#publications">Publicaciones</a>
+      <a class="nav__cta" href="#contact">Contacto</a>
     </div>
   </header>
 
   <main>
+    <!-- HERO -->
     <section class="hero">
       <div class="container">
-        <div class="hero-content">
-          <div class="hero-text">
-            <h1>Carlos Fabian<br>Fuentes Rivas</h1>
-            <div class="subtitle">Economist | Applied Economics | Public Policy & Data</div>
-            <p>
-              Transforming complex economic data into actionable insights for public policy.
-              Specialized in statistical modeling, econometrics, and geospatial analysis
-              for decision-making under uncertainty.
-            </p>
-            <div class="cta-buttons">
-              <a href="#contact" class="btn btn-primary">Get In Touch</a>
-              <a href="#projects" class="btn btn-secondary">View Projects</a>
-            </div>
+        <div class="hero__inner">
+          <div class="hero__meta" data-reveal>
+            <span class="hero__meta-item"><span class="dot" aria-hidden="true"></span>Ciudad de México · 2026</span>
+            <span class="hero__meta-item">Economista · Data Scientist</span>
+            <span class="hero__meta-item">Disponible para colaboraciones</span>
           </div>
-          <div class="hero-visual">
-            <div class="profile-image-container">
-              <div class="profile-image">
-                <img src="https://raw.githubusercontent.com/fabian-fuentes/fabian-fuentes.github.io/main/profile.jpg" alt="Carlos Fabian Fuentes Rivas - Economist & Data Scientist" />
+
+          <h1 class="hero__title" data-reveal>
+            <span class="line">Carlos Fabián</span>
+            <span class="line line--italic">Fuentes Rivas.</span>
+          </h1>
+
+          <div class="hero__grid">
+            <div data-reveal>
+              <p class="hero__lede">
+                Economista y científico de datos. Trabajo en modelación econométrica,
+                política pública y análisis geoespacial para decisiones bajo incertidumbre.
+              </p>
+              <div class="hero__actions">
+                <a href="#contact" class="btn btn--primary">
+                  Trabajemos juntos
+                  <span class="arrow" aria-hidden="true">→</span>
+                </a>
+                <a href="#projects" class="btn btn--ghost">Ver proyectos</a>
               </div>
             </div>
+
+            <figure class="hero__portrait" data-reveal aria-hidden="true">
+              <picture>
+                <source type="image/webp" srcset="profile.webp" />
+                <img src="profile.jpg" alt="" width="900" height="1125" loading="eager" decoding="async" fetchpriority="high" />
+              </picture>
+            </figure>
+          </div>
+
+          <div class="hero__scroll" aria-hidden="true">
+            <span class="hero__scroll-line"></span>
+            <span>Desplázate</span>
           </div>
         </div>
       </div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about">
       <div class="container">
-        <h2 class="section-title">About Me</h2>
-        <div class="contact-content">
-          <p style="font-size: 1.2rem; color: var(--text-muted);">
-            I am an economist currently pursuing a Master's in Applied Economics. My work focuses on 
-            statistical and econometric modeling, public policy analysis, and geospatial data for 
-            decision-making under uncertainty. With extensive experience in poverty measurement and 
-            sustainable development indicators, I bridge the gap between complex economic theory and 
-            practical policy implementation.
-          </p>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">01 · Perfil</span>
+          <h2 class="section-title">Donde la economía se <em>encuentra</em> con los datos.</h2>
+        </div>
+
+        <div class="about__grid">
+          <div class="about__text" data-reveal>
+            <p>
+              Soy economista y curso una <strong>Maestría en Economía Aplicada</strong>
+              en el Tecnológico de Monterrey. Mi trabajo combina modelación estadística
+              y econométrica con análisis de política pública y datos geoespaciales.
+            </p>
+            <p>
+              He liderado la medición oficial de pobreza multidimensional de México y
+              colaborado con el Banco Mundial en simulación de trayectorias climáticas.
+              Me interesa construir herramientas rigurosas para decidir bien cuando la
+              información es incompleta.
+            </p>
+          </div>
+
+          <aside class="about__meta" data-reveal>
+            <div class="about__meta-row">
+              <span class="about__meta-label">Base</span>
+              <span class="about__meta-value">Ciudad de México</span>
+            </div>
+            <div class="about__meta-row">
+              <span class="about__meta-label">Rol</span>
+              <span class="about__meta-value">Economista · Investigador</span>
+            </div>
+            <div class="about__meta-row">
+              <span class="about__meta-label">Foco</span>
+              <span class="about__meta-value">Pobreza · ODS · Clima</span>
+            </div>
+            <div class="about__meta-row">
+              <span class="about__meta-label">Idiomas</span>
+              <span class="about__meta-value">Español · Inglés</span>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
 
+    <!-- EXPERIENCE -->
     <section id="experience">
       <div class="container">
-        <h2 class="section-title">Experience</h2>
-        <div class="cards-grid">
-          <div class="card">
-            <h3>Senior Research Programmer</h3>
-            <div class="company">Tecnológico de Monterrey • 2024–Present</div>
-            <p>Leading simulation modeling projects for climate pathways in collaboration with World Bank teams. Developing advanced computational models to assess environmental and economic impacts of climate policies.</p>
-          </div>
-          <div class="card">
-            <h3>Associate Researcher</h3>
-            <div class="company">Tecnológico de Monterrey • 2023–2024</div>
-            <p>Conducted behavioral research on decision-making tools in uncertain environments. Applied experimental economics methodologies to understand policy effectiveness under uncertainty.</p>
-          </div>
-          <div class="card">
-            <h3>Deputy Director of Poverty Measurement</h3>
-            <div class="company">CONEVAL • 2020–2024</div>
-            <p>Managed national poverty metrics and SDG indicators using advanced econometric techniques. Led a team responsible for Mexico's official multidimensional poverty measurements and policy recommendations.</p>
-          </div>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">02 · Experiencia</span>
+          <h2 class="section-title">Investigación aplicada a <em>decisiones reales.</em></h2>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline__item" data-reveal>
+            <div class="timeline__year">2024 — Hoy</div>
+            <div class="timeline__body">
+              <h3>Senior Research Programmer</h3>
+              <div class="timeline__company">Tecnológico de Monterrey</div>
+              <p class="timeline__desc">
+                Lidero proyectos de modelación y simulación de trayectorias climáticas
+                en colaboración con equipos del Banco Mundial. Desarrollo modelos
+                computacionales para evaluar el impacto ambiental y económico de
+                políticas climáticas.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline__item" data-reveal>
+            <div class="timeline__year">2023 — 2024</div>
+            <div class="timeline__body">
+              <h3>Investigador asociado</h3>
+              <div class="timeline__company">Tecnológico de Monterrey</div>
+              <p class="timeline__desc">
+                Investigación conductual sobre herramientas de decisión en entornos
+                inciertos, aplicando economía experimental para entender la
+                efectividad de políticas bajo incertidumbre.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline__item" data-reveal>
+            <div class="timeline__year">2020 — 2024</div>
+            <div class="timeline__body">
+              <h3>Director Adjunto de Medición de Pobreza</h3>
+              <div class="timeline__company">CONEVAL</div>
+              <p class="timeline__desc">
+                Responsable de las métricas nacionales de pobreza e indicadores ODS
+                utilizando técnicas econométricas. Coordiné al equipo detrás de la
+                medición oficial de pobreza multidimensional de México y sus
+                recomendaciones de política pública.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- EDUCATION -->
     <section id="education">
       <div class="container">
-        <h2 class="section-title">Education</h2>
-        <div class="cards-grid">
-          <div class="card">
-            <h3>Master's in Applied Economics</h3>
-            <div class="company">Tecnológico de Monterrey • 2023–Present</div>
-            <p>Specializing in econometric modeling, public policy analysis, and quantitative methods for economic research.</p>
-          </div>
-          <div class="card">
-            <h3>Bachelor's in Economics</h3>
-            <div class="company">Universidad Autónoma Metropolitana • 2013–2017</div>
-            <p>Foundation in economic theory, statistical analysis, and quantitative methods with focus on development economics.</p>
-          </div>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">03 · Formación</span>
+          <h2 class="section-title">Teoría <em>rigurosa,</em> método aplicado.</h2>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline__item" data-reveal>
+            <div class="timeline__year">2023 — Hoy</div>
+            <div class="timeline__body">
+              <h3>Maestría en Economía Aplicada</h3>
+              <div class="timeline__company">Tecnológico de Monterrey</div>
+              <p class="timeline__desc">
+                Especialización en modelación econométrica, análisis de política pública
+                y métodos cuantitativos aplicados a la investigación económica.
+              </p>
+            </div>
+          </article>
+
+          <article class="timeline__item" data-reveal>
+            <div class="timeline__year">2013 — 2017</div>
+            <div class="timeline__body">
+              <h3>Licenciatura en Economía</h3>
+              <div class="timeline__company">Universidad Autónoma Metropolitana</div>
+              <p class="timeline__desc">
+                Formación en teoría económica, análisis estadístico y métodos
+                cuantitativos con enfoque en economía del desarrollo.
+              </p>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- SKILLS -->
     <section id="skills">
       <div class="container">
-        <h2 class="section-title">Technical Skills</h2>
-        <div class="skills-grid">
-          <div class="skill-category">
-            <h4>Programming</h4>
-            <div class="skill-tags">
-              <span class="skill-tag">R</span>
-              <span class="skill-tag">Python</span>
-              <span class="skill-tag">SQL</span>
-              <span class="skill-tag">Stata</span>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">04 · Capacidades</span>
+          <h2 class="section-title">Las <em>herramientas</em> que uso.</h2>
+        </div>
+
+        <div class="skills">
+          <article class="skill" data-reveal>
+            <span class="skill__num">Área 01</span>
+            <h3 class="skill__title">Programación</h3>
+            <div class="skill__tags">
+              <span class="tag">R</span>
+              <span class="tag">Python</span>
+              <span class="tag">SQL</span>
+              <span class="tag">Stata</span>
             </div>
-          </div>
-          <div class="skill-category">
-            <h4>Geospatial Analysis</h4>
-            <div class="skill-tags">
-              <span class="skill-tag">R Spatial</span>
-              <span class="skill-tag">QGIS</span>
-              <span class="skill-tag">ArcGIS</span>
+          </article>
+
+          <article class="skill" data-reveal>
+            <span class="skill__num">Área 02</span>
+            <h3 class="skill__title">Análisis geoespacial</h3>
+            <div class="skill__tags">
+              <span class="tag">R Spatial</span>
+              <span class="tag">QGIS</span>
+              <span class="tag">ArcGIS</span>
             </div>
-          </div>
-          <div class="skill-category">
-            <h4>Data Visualization</h4>
-            <div class="skill-tags">
-              <span class="skill-tag">Tableau</span>
-              <span class="skill-tag">PowerBI</span>
-              <span class="skill-tag">ggplot2</span>
+          </article>
+
+          <article class="skill" data-reveal>
+            <span class="skill__num">Área 03</span>
+            <h3 class="skill__title">Visualización de datos</h3>
+            <div class="skill__tags">
+              <span class="tag">Tableau</span>
+              <span class="tag">Power BI</span>
+              <span class="tag">ggplot2</span>
             </div>
-          </div>
-          <div class="skill-category">
-            <h4>Development Tools</h4>
-            <div class="skill-tags">
-              <span class="skill-tag">Git</span>
-              <span class="skill-tag">Docker</span>
-              <span class="skill-tag">AWS</span>
+          </article>
+
+          <article class="skill" data-reveal>
+            <span class="skill__num">Área 04</span>
+            <h3 class="skill__title">Herramientas de desarrollo</h3>
+            <div class="skill__tags">
+              <span class="tag">Git</span>
+              <span class="tag">Docker</span>
+              <span class="tag">AWS</span>
             </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- PROJECTS -->
     <section id="projects">
       <div class="container">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="publication-card">
-          <h4>Geospatial Policy Analysis – El Salvador</h4>
-          <p>Comprehensive mapping and clustering analysis of school infrastructure to support presidential advisors in education policy design. Utilized advanced geospatial techniques to identify optimal locations for educational investments and policy interventions.</p>
-          <p style="margin-top: 1rem; color: var(--text-muted);"><strong>Tools:</strong> R, QGIS, Spatial Statistics, Clustering Algorithms</p>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">05 · Proyectos</span>
+          <h2 class="section-title">Trabajos <em>seleccionados.</em></h2>
+        </div>
+
+        <div class="projects">
+          <article class="project" data-reveal>
+            <span class="project__num">Proyecto 01 · El Salvador</span>
+            <h3 class="project__title">Análisis geoespacial para política educativa</h3>
+            <p class="project__desc">
+              Mapeo y análisis de clústeres de infraestructura escolar para asesorar
+              a la presidencia en el diseño de política educativa. Técnicas geoespaciales
+              para identificar ubicaciones óptimas de inversión e intervenciones.
+            </p>
+            <div class="project__stack">
+              <span class="tag">R</span>
+              <span class="tag">QGIS</span>
+              <span class="tag">Spatial Statistics</span>
+              <span class="tag">Clustering</span>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
+    <!-- PUBLICATIONS -->
     <section id="publications">
       <div class="container">
-        <h2 class="section-title">Publications</h2>
-        <div class="publication-card">
-          <h4>Multidimensional Poverty in Mexico in the Context of the COVID-19 Health Emergency</h4>
-          <div class="journal">Dimensions, Oxford Poverty and Human Development Initiative (OPHI) • 2022</div>
-          <p>Analysis of the impact of COVID-19 on multidimensional poverty indicators in Mexico, examining changes in health, education, and living standards dimensions.</p>
-          <a href="https://ophi.org.uk/multidimensional-poverty-in-mexico-in-the-context-of-the-covid-19-health-emergency/" target="_blank">Read Publication →</a>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">06 · Publicaciones</span>
+          <h2 class="section-title">Investigación <em>publicada.</em></h2>
+        </div>
+
+        <div class="publications">
+          <article class="publication" data-reveal>
+            <div class="publication__num">01 / 2022</div>
+            <div>
+              <h3 class="publication__title">Multidimensional Poverty in Mexico in the Context of the COVID-19 Health Emergency</h3>
+              <div class="publication__journal">Dimensions · OPHI, Universidad de Oxford</div>
+              <p class="publication__desc">
+                Análisis del impacto del COVID-19 en los indicadores de pobreza
+                multidimensional en México, examinando cambios en las dimensiones
+                de salud, educación y nivel de vida.
+              </p>
+              <a class="publication__link" href="https://ophi.org.uk/multidimensional-poverty-in-mexico-in-the-context-of-the-covid-19-health-emergency/" target="_blank" rel="noopener noreferrer">
+                Leer publicación
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </article>
         </div>
       </div>
     </section>
 
-    <section id="contact">
+    <!-- CONTACT -->
+    <section id="contact" class="contact">
       <div class="container">
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="contact-content">
-          <p style="font-size: 1.2rem; color: var(--text-muted); margin-bottom: 2rem;">
-            Interested in collaborating on economic research, policy analysis, or data science projects? 
-            I'm always open to discussing innovative approaches to complex economic challenges.
-          </p>
-          <div class="contact-info">
-            <div class="contact-item">
-              <span>📧</span>
-              <a href="mailto:cffuentes@tec.mx">cffuentes@tec.mx</a>
-            </div>
+        <div class="section-head" data-reveal>
+          <span class="eyebrow">07 · Contacto</span>
+        </div>
+
+        <h2 class="contact__headline" data-reveal>
+          Hablemos de tu <em>próximo</em> proyecto.
+        </h2>
+
+        <div class="contact__actions" data-reveal>
+          <a class="btn btn--primary" href="mailto:cffuentes@tec.mx">
+            Escríbeme
+            <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn--ghost" href="https://www.linkedin.com/in/fabian-fuentes-7a69b7145/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </div>
+
+        <div class="contact__details" data-reveal>
+          <div class="contact__detail">
+            <span class="label">Email</span>
+            <a class="value" href="mailto:cffuentes@tec.mx">cffuentes@tec.mx</a>
+          </div>
+          <div class="contact__detail">
+            <span class="label">GitHub</span>
+            <a class="value" href="https://github.com/fabian-fuentes" target="_blank" rel="noopener noreferrer">@fabian-fuentes</a>
+          </div>
+          <div class="contact__detail">
+            <span class="label">LinkedIn</span>
+            <a class="value" href="https://www.linkedin.com/in/fabian-fuentes-7a69b7145/" target="_blank" rel="noopener noreferrer">fabian-fuentes</a>
+          </div>
+          <div class="contact__detail">
+            <span class="label">Ubicación</span>
+            <span class="value">México</span>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <footer>
+  <footer class="footer">
     <div class="container">
-      <div class="footer-links">
-        <a href="https://github.com/fabian-fuentes" target="_blank" rel="noopener">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/github.svg" alt="GitHub" class="social-icon"/>
-          GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/fabian-fuentes-7a69b7145/" target="_blank" rel="noopener">
-          <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/linkedin.svg" alt="LinkedIn" class="social-icon"/>
-          LinkedIn
-        </a>
+      <div class="footer__row">
+        <span class="footer__brand">
+          <span class="nav__brand-dot" aria-hidden="true"></span>
+          Fabián Fuentes
+        </span>
+        <span class="footer__meta">
+          © <span id="year"></span> · Carlos Fabián Fuentes Rivas. Todos los derechos reservados.
+        </span>
+        <span class="footer__meta">Diseño editorial · Modo oscuro</span>
       </div>
-      <p>&copy; <span id="year"></span> Carlos Fabian Fuentes Rivas. All rights reserved.</p>
     </div>
   </footer>
 
-  <script>
-    // Set current year
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
-          });
-        }
-      });
-    });
-
-    // Header scroll effect
-    window.addEventListener('scroll', function() {
-      const header = document.querySelector('header');
-      if (window.scrollY > 100) {
-        header.style.background = 'rgba(15, 23, 42, 0.98)';
-      } else {
-        header.style.background = 'rgba(15, 23, 42, 0.95)';
-      }
-    });
-
-    // Intersection Observer for animations
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-
-    const observer = new IntersectionObserver(function(entries) {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.style.opacity = '1';
-          entry.target.style.transform = 'translateY(0)';
-        }
-      });
-    }, observerOptions);
-
-    // Observe cards for scroll animations
-    document.querySelectorAll('.card, .skill-category, .publication-card').forEach(card => {
-      card.style.opacity = '0';
-      card.style.transform = 'translateY(30px)';
-      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-      observer.observe(card);
-    });
-  </script>
+  <script src="js/script.js" defer></script>
 </body>
 </html>
