@@ -204,6 +204,8 @@ section { padding: var(--section-y) 0; position: relative; }
   color: var(--bg);
 }
 
+.nav__menu { display: none; }
+
 .nav__toggle {
   display: none;
   width: 44px; height: 44px;
@@ -788,6 +790,7 @@ section { padding: var(--section-y) 0; position: relative; }
   .nav__cta { display: none; }
   .nav__toggle { display: inline-flex; z-index: 60; }
   .nav__menu {
+    display: flex;
     position: fixed;
     inset: 0;
     background: var(--bg);
