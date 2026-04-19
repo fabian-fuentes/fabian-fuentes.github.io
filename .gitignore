@@ -5,6 +5,9 @@
 _source.html
 _source/
 
+# Local preview / screenshots (mockups, not deploy artifact)
+preview/
+
 # Editor/OS
 .DS_Store
 Thumbs.db
