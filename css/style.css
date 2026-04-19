@@ -599,6 +599,60 @@ section { padding: var(--section-y) 0; position: relative; }
 .project__stack { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.5rem; }
 
 /* =========================================================
+   Certifications / Continuing Education
+   ========================================================= */
+
+.cert-list {
+  list-style: none;
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.cert {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem 2rem;
+  padding: clamp(1.25rem, 2.5vw, 1.75rem) 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s var(--ease);
+}
+
+.cert:hover {
+  background: linear-gradient(90deg, var(--bg-elev), transparent 80%);
+}
+
+.cert__year {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  color: var(--fg-subtle);
+  padding-top: 0.2rem;
+}
+
+.cert__title {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  color: var(--fg);
+  margin-bottom: 0.35rem;
+}
+
+.cert__org {
+  font-size: 0.9375rem;
+  color: var(--accent);
+}
+
+@media (min-width: 900px) {
+  .cert {
+    grid-template-columns: 8rem 1fr;
+    gap: 3rem;
+  }
+}
+
+/* =========================================================
    Publications
    ========================================================= */
 
