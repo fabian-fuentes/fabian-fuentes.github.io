@@ -1,0 +1,22 @@
+# Claude Code tooling (skill install, local settings)
+.claude/
+
+# Source material for content migration (not part of deploy artifact)
+_source.html
+_source/
+
+# Local preview artifacts: PNG mockups (preview/) are kept out; the
+# committed .preview-jpg/ folder holds compressed JPEGs for PR review.
+preview/
+
+# Editor/OS
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Python cache (from uipro scripts)
+__pycache__/
+*.pyc
