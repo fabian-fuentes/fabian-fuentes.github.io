@@ -19,9 +19,9 @@
   --fg:             #e8eaf2;
   --fg-muted:       #9ea4b8;
   --fg-subtle:      #5b627a;
-  --accent:         #9cb4ff;
-  --accent-dim:     #7a92df;
-  --accent-soft:    rgba(156, 180, 255, 0.14);
+  --accent:         #d97757;
+  --accent-dim:     #c86643;
+  --accent-soft:    rgba(217, 119, 87, 0.14);
   --accent-warm:    #e8c477;
   --border:         #232838;
   --border-strong:  #383f55;
@@ -86,7 +86,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   /* A subtle deep-field gradient so the edges feel like looking
      toward the galactic plane rather than a flat black. */
   background:
-    radial-gradient(ellipse at 20% 10%, rgba(156, 180, 255, 0.06), transparent 55%),
+    radial-gradient(ellipse at 20% 10%, rgba(217, 119, 87, 0.06), transparent 55%),
     radial-gradient(ellipse at 80% 90%, rgba(232, 196, 119, 0.04), transparent 60%),
     var(--bg);
 }
@@ -208,7 +208,7 @@ section { padding: var(--section-y) 0; position: relative; }
   background: var(--accent);
   display: inline-block;
   transform: translateY(-1px);
-  box-shadow: 0 0 8px rgba(156, 180, 255, 0.55);
+  box-shadow: 0 0 8px rgba(217, 119, 87, 0.55);
   animation: starTwinkle 5s ease-in-out infinite;
 }
 .nav__links {
@@ -305,7 +305,7 @@ section { padding: var(--section-y) 0; position: relative; }
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(60% 50% at 85% 15%, rgba(156, 180, 255, 0.10), transparent 70%),
+    radial-gradient(60% 50% at 85% 15%, rgba(217, 119, 87, 0.10), transparent 70%),
     radial-gradient(40% 40% at 0% 100%, rgba(232, 196, 119, 0.05), transparent 70%);
   pointer-events: none;
   z-index: 0;
@@ -332,13 +332,13 @@ section { padding: var(--section-y) 0; position: relative; }
   height: 6px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 8px rgba(156, 180, 255, 0.6);
+  box-shadow: 0 0 8px rgba(217, 119, 87, 0.6);
   animation: starTwinkle 4s ease-in-out infinite;
 }
 
 @keyframes starTwinkle {
-  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(156, 180, 255, 0.6); }
-  50%      { opacity: 0.55; box-shadow: 0 0 4px rgba(156, 180, 255, 0.3); }
+  0%, 100% { opacity: 1; box-shadow: 0 0 8px rgba(217, 119, 87, 0.6); }
+  50%      { opacity: 0.55; box-shadow: 0 0 4px rgba(217, 119, 87, 0.3); }
 }
 
 /* Constellation decoration — small SVG overlay next to hero */
@@ -383,7 +383,7 @@ section { padding: var(--section-y) 0; position: relative; }
 
 .constellation .c-star--bright {
   fill: var(--accent);
-  filter: drop-shadow(0 0 3px rgba(156, 180, 255, 0.8));
+  filter: drop-shadow(0 0 3px rgba(217, 119, 87, 0.8));
 }
 
 .constellation .c-star:nth-child(3n)  { animation-delay: 0.3s; animation-duration: 6s; }
@@ -459,7 +459,7 @@ section { padding: var(--section-y) 0; position: relative; }
   background: var(--bg-elev);
   box-shadow:
     0 30px 60px -20px rgba(0, 0, 0, 0.7),
-    0 0 0 1px rgba(156, 180, 255, 0.08),
+    0 0 0 1px rgba(217, 119, 87, 0.08),
     inset 0 0 40px rgba(11, 14, 23, 0.35);
   justify-self: end;
 }
