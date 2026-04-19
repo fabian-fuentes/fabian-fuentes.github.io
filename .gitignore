@@ -5,7 +5,8 @@
 _source.html
 _source/
 
-# Local preview / screenshots (mockups, not deploy artifact)
+# Local preview artifacts: PNG mockups (preview/) are kept out; the
+# committed .preview-jpg/ folder holds compressed JPEGs for PR review.
 preview/
 
 # Editor/OS
