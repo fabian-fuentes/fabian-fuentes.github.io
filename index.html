@@ -61,6 +61,8 @@
   </script>
 </head>
 <body>
+  <canvas class="starfield" aria-hidden="true"></canvas>
+
   <header class="nav" id="top">
     <div class="container">
       <div class="nav__row">
@@ -102,9 +104,21 @@
     <!-- HERO -->
     <section class="hero">
       <div class="container">
+        <div class="constellation constellation--hero" aria-hidden="true">
+          <svg viewBox="0 0 220 160" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Asterism inspired by Ursa Minor (stylized) -->
+            <path class="c-line" d="M28 132 L62 104 L96 88 L132 62 L168 42 L198 80 L132 62" />
+            <circle class="c-star c-star--bright" cx="28"  cy="132" r="2.5" />
+            <circle class="c-star"                cx="62"  cy="104" r="1.4" />
+            <circle class="c-star"                cx="96"  cy="88"  r="1.8" />
+            <circle class="c-star"                cx="132" cy="62"  r="1.4" />
+            <circle class="c-star c-star--bright" cx="168" cy="42"  r="2.3" />
+            <circle class="c-star"                cx="198" cy="80"  r="1.6" />
+          </svg>
+        </div>
         <div class="hero__inner">
           <div class="hero__meta" data-reveal>
-            <span class="hero__meta-item"><span class="dot" aria-hidden="true"></span>Mexico City · 2026</span>
+            <span class="hero__meta-item"><span class="dot" aria-hidden="true"></span>19.43°N &middot; Mexico City</span>
             <span class="hero__meta-item">Economist · Researcher</span>
             <span class="hero__meta-item">Tec de Monterrey</span>
           </div>
@@ -151,7 +165,7 @@
     <section id="about">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="eyebrow">01 · About</span>
+          <span class="eyebrow"><span class="eyebrow__glyph">α</span>01 · About</span>
           <h2 class="section-title">Research at the intersection of <em>decision science</em> and public policy.</h2>
         </div>
 
@@ -205,7 +219,7 @@
     <section id="experience">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="eyebrow">02 · Experience</span>
+          <span class="eyebrow"><span class="eyebrow__glyph">β</span>02 · Experience</span>
           <h2 class="section-title">Research, policy, and <em>teaching.</em></h2>
         </div>
 
@@ -342,7 +356,7 @@
     <section id="education">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="eyebrow">03 · Education</span>
+          <span class="eyebrow"><span class="eyebrow__glyph">γ</span>03 · Education</span>
           <h2 class="section-title">Rigorous <em>theory,</em> applied method.</h2>
         </div>
 
@@ -384,7 +398,7 @@
         </div>
 
         <div class="section-head" data-reveal style="margin-top: clamp(3rem, 6vw, 5rem);">
-          <span class="eyebrow">03b · Continuing Education</span>
+          <span class="eyebrow"><span class="eyebrow__glyph">γ′</span>03b · Continuing Education</span>
           <h2 class="section-title" style="font-size: clamp(1.75rem, 3.5vw, 2.75rem);">
             Short programs &amp; <em>certifications.</em>
           </h2>
@@ -432,7 +446,7 @@
     <section id="research">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="eyebrow">04 · Research</span>
+          <span class="eyebrow"><span class="eyebrow__glyph">δ</span>04 · Research</span>
           <h2 class="section-title">Current and recent <em>lines of work.</em></h2>
         </div>
 
@@ -497,7 +511,7 @@
     <section id="publications">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="eyebrow">05 · Publications</span>
+          <span class="eyebrow"><span class="eyebrow__glyph">ε</span>05 · Publications</span>
           <h2 class="section-title">Selected <em>writing.</em></h2>
         </div>
 
@@ -529,7 +543,7 @@
     <section id="methods">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="eyebrow">06 · Methods</span>
+          <span class="eyebrow"><span class="eyebrow__glyph">ζ</span>06 · Methods</span>
           <h2 class="section-title">Tools &amp; <em>methods.</em></h2>
         </div>
 
@@ -582,7 +596,7 @@
     <section id="contact" class="contact">
       <div class="container">
         <div class="section-head" data-reveal>
-          <span class="eyebrow">07 · Contact</span>
+          <span class="eyebrow"><span class="eyebrow__glyph">η</span>07 · Contact</span>
         </div>
 
         <h2 class="contact__headline" data-reveal>
