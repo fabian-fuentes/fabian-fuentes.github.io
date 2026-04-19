@@ -340,8 +340,8 @@ section { padding: var(--section-y) 0; position: relative; }
 
 .hero__portrait {
   position: relative;
-  aspect-ratio: 4 / 5;
-  max-width: 360px;
+  aspect-ratio: 1 / 1;
+  max-width: 420px;
   border-radius: var(--radius-lg);
   overflow: hidden;
   background: var(--bg-elev);
