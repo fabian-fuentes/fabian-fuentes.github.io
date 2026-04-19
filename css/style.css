@@ -675,6 +675,30 @@ section { padding: var(--section-y) 0; position: relative; }
   font-size: 0.72rem;
   letter-spacing: 0.1em;
   color: var(--fg-subtle);
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.publication__type {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  background: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.publication__year {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--fg-subtle);
 }
 .publication__title {
   font-family: var(--font-serif);
