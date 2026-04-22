@@ -85,6 +85,8 @@
 
   let stars = [];          // raw catalog: [ra, dec, mag, bv]
   let projected = [];      // { x, y, r, rgb, alpha, tw, ts, tp }
+  let constellations = []; // [{ id, lines: [[[ra,dec],...], ...] }]
+  let constLines = [];     // projected polylines as [[x,y],[x,y],...]
   let w = 0, h = 0, dpr = 1, cx = 0, cy = 0, scale = 5;
 
   let targetParallaxX = 0, targetParallaxY = 0;
@@ -174,6 +176,7 @@
     const jd = toJD(date);
     const lst = lstDeg(jd, observer.lon);
     projected.length = 0;
+    constLines.length = 0;
 
     for (let i = 0; i < stars.length; i++) {
       const s = stars[i];
@@ -190,6 +193,27 @@
         ts: 0.15 + Math.random() * 0.9,
         tp: Math.random() * Math.PI * 2,
       });
+    }
+
+    // Project each constellation stick figure. A segment is only drawn
+    // when both of its endpoints are above the horizon — anything
+    // crossing the horizon gets cleanly skipped.
+    for (let i = 0; i < constellations.length; i++) {
+      const c = constellations[i];
+      for (let j = 0; j < c.lines.length; j++) {
+        const line = c.lines[j];
+        for (let k = 0; k < line.length - 1; k++) {
+          const a = line[k];
+          const b = line[k + 1];
+          const pa = altAz(a[0], a[1], lst, observer.lat);
+          const pb = altAz(b[0], b[1], lst, observer.lat);
+          if (pa.alt <= 0 || pb.alt <= 0) continue;
+          const A = project(pa.alt, pa.az);
+          const B = project(pb.alt, pb.az);
+          if (!A || !B) continue;
+          constLines.push([A.x, A.y, B.x, B.y]);
+        }
+      }
     }
   }
 
@@ -218,6 +242,21 @@
 
     parallaxX += (targetParallaxX - parallaxX) * 0.05;
     parallaxY += (targetParallaxY - parallaxY) * 0.05;
+
+    // Constellations first, behind the stars. Subtle clay lines that
+    // read as connective tissue without competing with the starfield.
+    if (constLines.length) {
+      ctx.lineWidth = 0.65;
+      ctx.strokeStyle = "rgba(217, 119, 87, 0.22)";
+      ctx.lineCap = "round";
+      ctx.beginPath();
+      for (let i = 0; i < constLines.length; i++) {
+        const [x1, y1, x2, y2] = constLines[i];
+        ctx.moveTo(x1 + parallaxX * 0.35, y1 + parallaxY * 0.35);
+        ctx.lineTo(x2 + parallaxX * 0.35, y2 + parallaxY * 0.35);
+      }
+      ctx.stroke();
+    }
 
     const len = projected.length;
     for (let i = 0; i < len; i++) {
@@ -314,10 +353,14 @@
     );
   }
 
-  // Fetch the catalog asynchronously and swap the placeholder for the
-  // real sky.
-  fetch("data/bsc.json", { cache: "force-cache" })
-    .then((r) => (r.ok ? r.json() : Promise.reject(r.status)))
+  // Fetch the star and constellation catalogs in parallel and swap the
+  // placeholder for the real sky once stars arrive.
+  const fetchJSON = (url) =>
+    fetch(url, { cache: "force-cache" }).then((r) =>
+      r.ok ? r.json() : Promise.reject(r.status)
+    );
+
+  fetchJSON("data/bsc.json")
     .then((data) => {
       stars = data;
       reproject();
@@ -325,6 +368,15 @@
     })
     .catch(() => {
       // Catalog unavailable — keep the random placeholder.
+    });
+
+  fetchJSON("data/constellations.json")
+    .then((data) => {
+      constellations = data;
+      if (stars.length) reproject();
+    })
+    .catch(() => {
+      // Constellation catalog is a nice-to-have — silent failure is OK.
     });
 
   // Recompute the sky every 10 minutes so an open tab still shows
