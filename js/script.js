@@ -334,23 +334,71 @@
     );
   }
 
-  // Optional: geolocate the user to reproject against their horizon.
-  // Silent — no prompt unless we explicitly request it below. We only
-  // ask once per visit and fall back to Mexico City.
-  function requestGeo() {
-    if (!("geolocation" in navigator)) return;
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        observer.lat = pos.coords.latitude;
-        observer.lon = pos.coords.longitude;
-        observer.label = "Your location";
-        if (stars.length) reproject();
+  // Update the hero location pill whenever the observer moves.
+  const coordEl = $("#hero-location-coord");
+  const cityEl  = $("#hero-location-city");
+
+  function formatLat(lat) {
+    const hemi = lat >= 0 ? "N" : "S";
+    return `${Math.abs(lat).toFixed(2)}°${hemi}`;
+  }
+
+  function applyObserver(lat, lon, label) {
+    observer.lat = lat;
+    observer.lon = lon;
+    observer.label = label;
+    if (coordEl) coordEl.textContent = formatLat(lat);
+    if (cityEl)  cityEl.textContent  = label;
+    if (stars.length) reproject();
+  }
+
+  // Silent IP-based geolocation — no browser prompt, no PII stored.
+  // We try two public services in sequence; on total failure the
+  // default Mexico City sky remains.
+  function locateByIp() {
+    const endpoints = [
+      {
+        url: "https://ipapi.co/json/",
+        parse: (d) =>
+          d && typeof d.latitude === "number" && typeof d.longitude === "number"
+            ? {
+                lat: d.latitude,
+                lon: d.longitude,
+                label: d.city || d.region || d.country_name,
+              }
+            : null,
       },
-      () => {
-        /* user denied or unavailable — keep Mexico City */
+      {
+        url: "https://ipwho.is/",
+        parse: (d) =>
+          d && d.success !== false && typeof d.latitude === "number"
+            ? { lat: d.latitude, lon: d.longitude, label: d.city || d.country }
+            : null,
       },
-      { timeout: 6000, maximumAge: 60 * 60 * 1000 }
-    );
+    ];
+
+    const withTimeout = (promise, ms) =>
+      Promise.race([
+        promise,
+        new Promise((_, rej) => setTimeout(() => rej(new Error("timeout")), ms)),
+      ]);
+
+    (async () => {
+      for (const ep of endpoints) {
+        try {
+          const r = await withTimeout(fetch(ep.url, { cache: "no-store" }), 3500);
+          if (!r.ok) continue;
+          const d = await r.json();
+          const loc = ep.parse(d);
+          if (!loc || !loc.label) continue;
+          applyObserver(loc.lat, loc.lon, loc.label);
+          return;
+        } catch (_) {
+          /* try next endpoint */
+        }
+      }
+      // Nothing worked — leave Mexico City in place.
+    })();
   }
 
   // Fetch the star and constellation catalogs in parallel and swap the
@@ -364,7 +412,7 @@
     .then((data) => {
       stars = data;
       reproject();
-      requestGeo();
+      locateByIp();
     })
     .catch(() => {
       // Catalog unavailable — keep the random placeholder.
